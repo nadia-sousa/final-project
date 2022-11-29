@@ -2,7 +2,8 @@
 
 Group Members: Nadia Sousa, Yashaswini Mandalam, Sean Phelan, Wyatt Polasek
 
-https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/
+https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/[Dictionary-in-csv.zip](https://github.com/nadia-sousa/final-project/files/10116493/Dictionary-in-csv.zip)
+
 
 <h2> Project Summary </h2>
 
