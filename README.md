@@ -33,4 +33,17 @@ An example output would look something like this:
 </kbd>
 
 <h2> How to: </h2>
+Instructions on how to compile this program are shown below
 
+Note that the first command is the filename, the second is the string and third is the algorithm the user wants to use
+
+For Rabin Karp
+```
+g++ stringSearch.cpp -o stringSearch
+./stringSearch Sample1.txt xYz rb
+```
+For Boyer Moore
+```
+g++ stringSearch.cpp -o stringSearch
+./stringSearch Sample1.txt xYz bm
+```
