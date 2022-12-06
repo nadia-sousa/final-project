@@ -1,3 +1,27 @@
+// Names: Nadia Sousa, Yashaswini Mandalam, C. Wyatt Polasek, Sean Phelan
+// Term Project: StringSearch1 - stringSearch.cpp
+// File to run our string search algorithm
+
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include<iomanip>
+
+//This program uses the Rabin Karp or Boyer Moore algorithm to find a certain pattern in a text
+// Compile instructions:
+// For Rabin Karp ->  ./stringSearch filename pattern rb 
+// For Boyer Moore -> ./stringSearch filename pattern bm
+
+// tasks - rk function
+//parameters is large string and small string
+//necessary numbers:
+//length of big string
+//length of pattern
+//hash value of text, hash value of pattern
+//a prime number to mod
+//a d value to multiply
+
 // Rabin Karp Function
 int rabinKarp(std::string pattern, std::string* bigStr){
     //Declaration of variables to be used
@@ -57,6 +81,21 @@ int rabinKarp(std::string pattern, std::string* bigStr){
     }
 
     return found;
+}
+
+// Badchar Shift Function
+    //Preprocessing for shift table used in the Boyer Moore function
+void badcharShift(std::string pattern, std::vector<int>* shifts){
+
+        //Default store a shift = pattern length
+    for(int i = 0; i < 256; i++){
+        shifts->push_back(-1);
+    }
+
+        //Calculates and inserts shifts for letters that are present in the pattern
+    for(int i = 0; i < pattern.size(); i++){
+        (*shifts)[(int) pattern[i]] = i;
+    }
 }
 
 // Boyer Moore Function
