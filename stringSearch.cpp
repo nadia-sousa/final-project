@@ -136,3 +136,84 @@ int boyerMoore(std::string pattern, std::string *bigStr, std::vector<int>* shift
 
     return found;
 }
+
+// Readfile Function
+    //Reads all characters from the file into a variable called bigStr
+void readFile(std::string filename, std::string* bigStr){
+        //Opens file with the name 'filename'
+    std::ifstream file(filename);
+        //Reads the string in the first line to a pointer of the string variable 'bigStr'
+    std::string temp;
+    while(std::getline(file, temp)){
+        (*bigStr) += temp;
+    }
+}
+
+
+// tasks - main
+//get input string, file name and type of algorithm
+//read the file and store characters into a string
+//rb for rabin karp, bm for boyer moore
+//pass the input string and big string into the RK or BM function
+
+// Main Function
+int main(int argc, char* argv[]){
+
+//Reading input from command line arguments
+        //Filename
+    std::string filename = argv[1];
+        //String to search for
+    std::string inStr = argv[2];
+        //Choice for either the Rabin Karp or Boyer Moore algorithm
+    std::string algorithm = argv[3];
+        //Variable to hold the string to be searched through
+    std::string bigStr;
+        //Vector to hold shifts
+    std::vector<int> shifts;
+        //Number of instances where the input string was found
+    int found;
+
+//Declares time function to track overall runtime
+    clock_t start, end;
+
+    //Takes time value at start of function
+    start = clock();
+
+//Calls the readfile function to read bigStr from filename
+    readFile(filename, &bigStr);
+//Determines which algorithm should be used based on user input
+        //Rabin Karp algorithm
+    if(algorithm == "rb"){
+
+            //Calls algorithm and reads the retern value into the found variable
+        found = rabinKarp(inStr, &bigStr);
+
+            //Takes time value at the end of the Rabin Karp algorithm
+        end = clock();
+
+            //Output for algorithm used
+        std::cout << "\nUsing the Rabin Karp Algorithm:\n";
+    }
+        //Boyer Moore algorithm
+    else{
+
+            //This function stores shifts into the shifts vector
+        badcharShift(inStr, &shifts);
+            //Calls algorithm and reads the retern value into the found variable
+        found = boyerMoore(inStr, &bigStr, &shifts);
+
+            //Takes time value at the end of the Boyer Moore algorithm
+        end = clock();
+
+            //Output for algorithm used
+        std::cout << "\nUsing the Boyer Moore Algorithm:\n";
+    }
+
+//Calculate and display time
+    double timeElapsed = ( double(end - start) / double(CLOCKS_PER_SEC) );
+    // std::cout << "Time Elapsed: " << std::fixed << timeElapsed << std::setprecision(5) << "sec(s)\n\n";
+
+//Final output
+        //Number of instances found and time elapsed
+    std::cout << "(" << found << ") instances of '" << inStr << "' found in " << std::fixed << timeElapsed << std::setprecision(5) << "sec(s)\n\n";    
+}
