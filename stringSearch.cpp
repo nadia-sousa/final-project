@@ -59,3 +59,41 @@ int rabinKarp(std::string pattern, std::string* bigStr){
     return found;
 }
 
+// Boyer Moore Function
+int boyerMoore(std::string pattern, std::string *bigStr, std::vector<int>* shifts){
+    //Declaration of variables to be used
+        //Pattern Length
+    int patLen = pattern.size();
+        //Text Length
+    int textLen = bigStr->size();
+        //Incremental and hold variables
+    int idx = 0;
+    int found = 0;
+    int j;
+
+
+    //While loop to conitinue until the end of the text
+    while(idx <= textLen - patLen){
+
+        j = patLen - 1;
+            //loop to check if the characters match
+        while(j >= 0 && pattern[j] == (*bigStr)[idx + j]){
+            j--;
+        }
+
+            //Increments found if all characters match
+        if(j < 0){
+            found++;
+            if(idx + patLen < textLen){
+                idx = idx + patLen - (*shifts)[(*bigStr)[idx + patLen]];
+            }
+        }
+
+            //If there is a mismatch, gets the shift from shift vector
+        if(j >= 0){
+            idx = idx + std::max(1, j - (*shifts)[(*bigStr)[idx + j]]);
+        }
+    }
+
+    return found;
+}
